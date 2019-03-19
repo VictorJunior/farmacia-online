@@ -59,11 +59,14 @@ public class Empresa implements Serializable {
 	private Date dataCriacao;
 	private Date dataAtualizacao;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Cidade cidade;
+	
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Produto> produtos = new ArrayList<>();
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Cidade cidade;
+	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Empresa() {		
 	}
@@ -204,6 +207,22 @@ public class Empresa implements Serializable {
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	@PreUpdate

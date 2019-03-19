@@ -44,6 +44,9 @@ public class Pedido implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Endereco enderecoDeEntrega;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Empresa empresa;
+	
 	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<ItemPedido> itens = new ArrayList<>();
 	
@@ -105,6 +108,14 @@ public class Pedido implements Serializable {
 
 	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	@Override
