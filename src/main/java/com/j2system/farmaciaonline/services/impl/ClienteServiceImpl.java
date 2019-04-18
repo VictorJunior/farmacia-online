@@ -22,7 +22,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Optional<Cliente> buscarPorEmail(String email) {
 		log.info("Buscando um Cliente por Email {}", email);
-		return Optional.ofNullable(clienteRepository.findByEmail(email));
+		return clienteRepository.findByEmail(email);
 	}
 
 	@Override

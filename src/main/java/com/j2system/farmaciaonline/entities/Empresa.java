@@ -63,17 +63,17 @@ public class Empresa implements Serializable {
 	private Cidade cidade;
 	
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Produto> produtos = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Pedido> pedidos = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "id.empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<ProdutoEmpresa> produtosEmpresa = new ArrayList<>();
 	
 	public Empresa() {		
 	}
 
 	public Empresa(Integer id, String razaoSocial, String nomeFantasia, String cnpj, String inscricaoEstadual,
 			String endereco, String numero, String complemento, String bairro, String cep, Long latitude,
-			Long longitude) {
+			Long longitude, Cidade cidade) {
 		super();
 		this.id = id;
 		this.razaoSocial = razaoSocial;
@@ -87,6 +87,7 @@ public class Empresa implements Serializable {
 		this.cep = cep;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.cidade = cidade;
 	}
 
 	public Integer getId() {
@@ -201,14 +202,6 @@ public class Empresa implements Serializable {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
-	
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
@@ -223,6 +216,14 @@ public class Empresa implements Serializable {
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+
+	public List<ProdutoEmpresa> getProdutosEmpresa() {
+		return produtosEmpresa;
+	}
+
+	public void setProdutosEmpresa(List<ProdutoEmpresa> produtosEmpresa) {
+		this.produtosEmpresa = produtosEmpresa;
 	}
 
 	@PreUpdate

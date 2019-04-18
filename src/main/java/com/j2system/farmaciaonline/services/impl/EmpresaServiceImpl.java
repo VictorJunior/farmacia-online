@@ -39,6 +39,12 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 	
 	@Override
+	public List<Empresa> buscarTodasEmpresas() {
+		log.info("Buscando todas as empreasas");
+		return empresaRepository.findAllByOrderByNomeFantasia();
+	}	
+	
+	@Override
 	public Optional<Empresa> buscarPorId(Integer id) {
 		log.info("Buscando uma empresa pelo ID {}", id);
 		return empresaRepository.findById(id);
@@ -54,6 +60,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public void remover(Integer id) {
 		log.info("Removendo a empresa ID {}", id);
 		this.empresaRepository.deleteById(id);
-	}		
+	}
 
 }

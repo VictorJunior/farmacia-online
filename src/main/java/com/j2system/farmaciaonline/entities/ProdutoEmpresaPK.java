@@ -7,41 +7,42 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class ItemPedidoPK implements Serializable {
+public class ProdutoEmpresaPK implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-	private Pedido pedido;
+	private Empresa empresa;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Produto produto;
-	
-	public Pedido getPedido() {
-		return pedido;
+
+	public Empresa getEmpresa() {
+		return empresa;
 	}
-	
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
-	
+
 	public Produto getProduto() {
 		return produto;
 	}
-	
+
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((pedido == null) ? 0 : pedido.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -50,11 +51,11 @@ public class ItemPedidoPK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ItemPedidoPK other = (ItemPedidoPK) obj;
-		if (pedido == null) {
-			if (other.pedido != null)
+		ProdutoEmpresaPK other = (ProdutoEmpresaPK) obj;
+		if (empresa == null) {
+			if (other.empresa != null)
 				return false;
-		} else if (!pedido.equals(other.pedido))
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (produto == null) {
 			if (other.produto != null)

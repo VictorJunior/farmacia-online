@@ -12,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -29,13 +28,10 @@ public class Produto implements Serializable {
 	private Integer id;
 	
 	@Column(nullable = false)
-	private String codProdutoEmpresa;
+	private String codigoBarras;
 	
 	@Column(nullable = false)
 	private String nome;
-	
-	@Column(nullable = false)
-	private Double preco;
 	
 	private String descricao;
 	private String marca;
@@ -46,24 +42,22 @@ public class Produto implements Serializable {
 	private String quantidade;
 	private Date dataCriacao;
 	private Date dataAtualizacao;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Empresa empresa;
 	
 	@OneToMany(mappedBy = "id.produto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<ItemPedido> itens = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "id.produto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<ProdutoEmpresa> produtosEmpresa = new ArrayList<>();
+	
 	public Produto() {
 	}
 
-	public Produto(Integer id, String codProdutoEmpresa, String nome, Double preco, String descricao, String marca,
-			String fabricante, String registroMS, String principioAtivo, String dosagem, String quantidade,
-			Empresa empresa) {
+	public Produto(Integer id, String codigoBarras, String nome, String descricao, String marca,
+			String fabricante, String registroMS, String principioAtivo, String dosagem, String quantidade) {
 		super();
 		this.id = id;
-		this.codProdutoEmpresa = codProdutoEmpresa;
+		this.codigoBarras = codigoBarras;
 		this.nome = nome;
-		this.preco = preco;
 		this.descricao = descricao;
 		this.marca = marca;
 		this.fabricante = fabricante;
@@ -71,7 +65,6 @@ public class Produto implements Serializable {
 		this.principioAtivo = principioAtivo;
 		this.dosagem = dosagem;
 		this.quantidade = quantidade;
-		this.empresa = empresa;
 	}
 
 	public Integer getId() {
@@ -82,28 +75,12 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	public String getCodProdutoEmpresa() {
-		return codProdutoEmpresa;
-	}
-
-	public void setCodProdutoEmpresa(String codProdutoEmpresa) {
-		this.codProdutoEmpresa = codProdutoEmpresa;
-	}
-
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
 	}
 
 	public String getDescricao() {
@@ -178,20 +155,20 @@ public class Produto implements Serializable {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-
 	public List<ItemPedido> getItens() {
 		return itens;
 	}
 
 	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
+	}
+
+	public List<ProdutoEmpresa> getProdutosEmpresa() {
+		return produtosEmpresa;
+	}
+
+	public void setProdutosEmpresa(List<ProdutoEmpresa> produtosEmpresa) {
+		this.produtosEmpresa = produtosEmpresa;
 	}
 
 	@PreUpdate

@@ -1,6 +1,7 @@
 package com.j2system.farmaciaonline.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,5 +33,10 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 	Page<Produto> findProdutosPorEmpresaNome(@Param("empresaId") Integer empresa_id, 
 											 @Param("nome") String nome,
 											 Pageable pageRequest);
-
+	
+	@Transactional(readOnly = true)
+	@Query("SELECT obj FROM Produto obj WHERE obj.empresa.id = :empresaId AND obj.codProdutoEmpresa = :codigoNaEmpresa")
+	Optional<Produto> findProdutosPorCodigoNaEmpresa(@Param("empresaId") Integer empresa_id, 
+										   		     @Param("codigoNaEmpresa") String codigoNaEmpresa);
+	
 }

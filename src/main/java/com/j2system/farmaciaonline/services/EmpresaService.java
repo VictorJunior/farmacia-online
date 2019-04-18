@@ -31,6 +31,13 @@ public interface EmpresaService {
 	List<Empresa> buscarPorNomeFantasia(String nomeFantasia);
 	
 	/**
+	 * Retorna uma listagem de todas as empresas.
+	 *
+	 * @return List<Empresa>
+	 */
+	List<Empresa> buscarTodasEmpresas();
+	
+	/**
 	 * Retorna uma empresa por ID.
 	 * 
 	 * @param id
@@ -52,4 +59,5 @@ public interface EmpresaService {
 	 * @param id
 	 */
 	void remover(Integer id);
+	
 }

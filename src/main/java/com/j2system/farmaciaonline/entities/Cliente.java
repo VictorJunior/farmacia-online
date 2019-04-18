@@ -21,7 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.j2system.farmaciaonline.enums.TipoPessoaEnum;
+import com.j2system.farmaciaonline.enums.PerfilEnum;
 
 @Entity
 @Table(name = "cliente")
@@ -43,11 +43,11 @@ public class Cliente implements Serializable {
 	private String senha;
 	
 	@Column(nullable = false)
-	private String cpfOuCnpj;
+	private String cpf;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private TipoPessoaEnum tipoPessoa;
+	@Column(name = "perfil", nullable = false)
+	private PerfilEnum perfil;
 	
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
@@ -62,14 +62,14 @@ public class Cliente implements Serializable {
 	public Cliente() {
 	}
 
-	public Cliente(Integer id, String nome, String email, String senha, String cpfOuCnpj, TipoPessoaEnum tipoPessoa) {
+	public Cliente(Integer id, String nome, String email, String senha, String cpf, PerfilEnum perfil) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipoPessoa = tipoPessoa;
+		this.cpf = cpf;
+		this.perfil = perfil;
 	}
 
 	public Integer getId() {
@@ -104,20 +104,20 @@ public class Cliente implements Serializable {
 		this.senha = senha;
 	}
 
-	public String getCpfOuCnpj() {
-		return cpfOuCnpj;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setCpfOuCnpj(String cpfOuCnpj) {
-		this.cpfOuCnpj = cpfOuCnpj;
+	public void setCpfOuCnpj(String cpf) {
+		this.cpf = cpf;
 	}
 
-	public TipoPessoaEnum getTipoPessoa() {
-		return tipoPessoa;
+	public PerfilEnum getPerfil() {
+		return perfil;
 	}
 
-	public void setTipoPessoa(TipoPessoaEnum tipoPessoa) {
-		this.tipoPessoa = tipoPessoa;
+	public void setPerfil(PerfilEnum perfil) {
+		this.perfil = perfil;
 	}
 
 	public Set<String> getTelefone() {
